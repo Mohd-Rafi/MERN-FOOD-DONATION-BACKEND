@@ -64,19 +64,4 @@ router.patch('/profile/update/:id', async (req, res) => {
   }
 });
 
-router.post('/addlisting', async (req, res) => {
-  try {
-    const body = { ...req.body };
-    const donor = await Donor.create(body);
-    res.status(200).json({ message: 'new List added', donor });
-  } catch (error) {
-    res.status(400).json({ error });
-  }
-});
-
-router.get('/addlisting/details/:id', async (req, res) => {
-  const { id } = req.params;
-  const donor = await Donor.findById(id);
-  res.status(200).json(donor);
-});
 export default router;

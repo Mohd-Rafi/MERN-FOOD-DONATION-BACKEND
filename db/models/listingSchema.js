@@ -52,6 +52,10 @@ const schema = Schema(
       type: Schema.Types.ObjectId,
       ref: 'Donor',
     },
+    headCount: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );
