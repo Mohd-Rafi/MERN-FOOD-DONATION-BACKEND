@@ -41,10 +41,13 @@ router.post('/login', async (req, res) => {
 });
 //edit user profile
 
-router.get('/user/:id', async (req, res) => {
-  const { id } = req.params;
-  const body = { ...req.body };
-  const users = await User.findByIdAndUpdate(id, body);
-  res.status(200).json({ message: 'User profile updated' });
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
 });
 export default router;

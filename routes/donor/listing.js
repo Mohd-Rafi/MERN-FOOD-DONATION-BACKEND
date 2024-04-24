@@ -27,13 +27,12 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//get list details
+//get list details by reciever
 
-router.get('/details/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const { id } = req.params;
-    const listing = await Listing.findById(id);
-    res.status(200).json(listing);
+    const listings = await Listing.find().populate('donor');
+    res.status(200).json(listings);
   } catch (error) {
     res.status(200).json(error);
   }
