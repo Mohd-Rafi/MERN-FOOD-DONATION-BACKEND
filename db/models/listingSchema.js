@@ -44,10 +44,6 @@ const schema = Schema(
       trim: true,
       required: true,
     },
-    status: {
-      type: String,
-      enum: ['FREE', 'BOOKED', 'NOT AVAILALBE'],
-    },
     donor: {
       type: Schema.Types.ObjectId,
       ref: 'Donor',
@@ -55,6 +51,10 @@ const schema = Schema(
     headCount: {
       type: Number,
       required: true,
+    },
+    status: {
+      type: String,
+      enum: ['BOOKED', 'FREE'],
     },
   },
   { timestamps: true }
