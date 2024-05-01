@@ -39,7 +39,7 @@ router.get('/listing/:id', async (req, res) => {
   }
 });
 
-//get your bookings details after clicking user-your-bookingspage cards in userpage
+//get your bookings details after clicking user-your-bookingspage cards in userpages
 router.get('/your-bookings/:id', async (req, res) => {
   try {
     const { id } = req.params;
