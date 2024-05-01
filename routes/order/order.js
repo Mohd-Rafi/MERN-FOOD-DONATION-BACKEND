@@ -17,10 +17,33 @@ router.post('/', async (req, res) => {
   }
 });
 
+//get order listing-user details by donor in donor home
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const order = await Order.find({ listing: id }).populate('user');
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+//get your bookings mians by user in user-your-bookingspage
+router.get('/listing/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await Order.find({ user: id }).populate(['listing', 'donor']);
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+//get your bookings details after clicking user-your-bookingspage cards in userpage
+router.get('/your-bookings/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id).populate(['donor', 'listing']);
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json(error);

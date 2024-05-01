@@ -11,7 +11,6 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
     const body = { ...req.body };
-    // const order = await Order.create({ status: 'Free' });
     const listing = await Listing.create(body);
     res.status(200).json(listing);
   } catch (error) {
