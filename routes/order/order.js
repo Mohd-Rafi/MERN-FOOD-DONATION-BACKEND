@@ -45,8 +45,8 @@ router.get('/your-bookings/:id', async (req, res) => {
     const { id } = req.params;
     const order = await Order.findById(id).populate(['donor', 'listing']);
     res.status(200).json(order);
-  } catch (error) {
-    res.status(400).json(error);
+  } catch (errors) {
+    res.status(400).json(errors);
   }
 });
 
