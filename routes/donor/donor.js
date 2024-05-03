@@ -42,6 +42,24 @@ router.post('/login', async (req, res) => {
   res.status(200).json({ message: 'Login Successfull', token });
 });
 
+router.post('/google', async (req, res) => {
+  const body = { ...req.body };
+  const donor = await Donor.findOne({ email: body.email });
+  if (!donor) {
+    const newDonor = await Donor.create(body);
+    const key = process.env.SECRET_KEY;
+    const token = jwt.sign({ role: 'DONOR', id: newDonor._id }, key, {
+      expiresIn: '7d',
+    });
+    return res.status(200).json({ message: 'Login Successfull', token });
+  }
+  const key = process.env.SECRET_KEY;
+  const token = jwt.sign({ role: 'DONOR', id: donor._id }, key, {
+    expiresIn: '7d',
+  });
+  return res.status(200).json({ message: 'Login Successfull', token });
+});
+
 //donor by donorid
 
 router.get('/profile/:id', async (req, res) => {
